@@ -13,14 +13,14 @@ void World::generate() {
 }
 
 int World::getBlock(int x, int y, int z) {
-	if (!(x > 0 && y > 0 && z > 0) && (x < this->size && y < this->size && z < this->size)) //Todo: allow negative coordinates
+	if (x < 0 || y < 0 || z < 0 || x > this->size || y > this->size || z > this->size) //Todo: allow negative coordinates
 		return -1;
 
 	return this->blocks[x][y][z];
 }
 
 void World::setBlock(int x, int y, int z, int type) {
-	if (!(x > 0 && y > 0 && z > 0) && (x < this->size && y < this->size && z < this->size))
+	if (x < 0 || y < 0 || z < 0 || x > this->size || y > this->size || z > this->size)
 		return;
 
 	this->blocks[x][y][z] = type;
