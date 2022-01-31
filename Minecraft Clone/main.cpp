@@ -6,11 +6,15 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include <string>
+
 #include "shader.h"
 #include "Camera.h"
 #include "Cube.h"
 #include "Game.h"
 #include <filesystem>
+
+#include <math.h>
 
 #include <iostream>
 
@@ -19,6 +23,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+
+void loadTexture(const char* path);
 
 // settings
 const unsigned int SCR_WIDTH = 1280;
@@ -29,9 +35,14 @@ float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
+Game game;
+
 // timing
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
+
+unsigned int textures[7];
+int numTextures = 0;
 
 int main()
 {
@@ -84,38 +95,24 @@ int main()
 
     // load and create a texture 
     // -------------------------
-    unsigned int texture1, texture2;
     // texture 1
     // ---------
-    glGenTextures(1, &texture1);
-    glBindTexture(GL_TEXTURE_2D, texture1);
-    // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // load image, create texture and generate mipmaps
-    int width, height, nrChannels;
-    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-    unsigned char* data = stbi_load("gfx/textures/cobble.jpg", &width, &height, &nrChannels, 0);
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
+    glGenTextures(7, &textures[numTextures]);
+
+
+    loadTexture("gfx/textures/cobblestone.png");
+    loadTexture("gfx/textures/dirt.png");
+    loadTexture("gfx/textures/mossy_cobblestone.png");
+    loadTexture("gfx/textures/glass.png");
+    loadTexture("gfx/textures/white_wool.png");
+    loadTexture("gfx/textures/oak_planks.png");
+    loadTexture("gfx/textures/blue_wool.png");
 
     // tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
     // -------------------------------------------------------------------------------------------
     shader.use();
-    shader.setInt("texture1", 0);
+    shader.setInt("texture1", 1);
 
-    Game game;
     game.initialize(&camera);
     camera.game = &game; //todo: improve
 
@@ -151,6 +148,11 @@ int main()
 
         // render boxes
         game.render(&shader);
+
+        glm::vec3 handPosition = glm::vec3(camera.Position.x, camera.Position.y, camera.Position.z) + camera.Front * 0.3f + camera.Right * 0.15f - camera.Up * 0.1f + camera.Up * std::sinf(1.3f*glfwGetTime()) * 0.01f;
+       
+        cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
+
 
 
         //cube.render(0, glm::vec3(camera.lookingAt.x, camera.lookingAt.y+1, camera.lookingAt.z), &shader);
@@ -229,7 +231,8 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    camera.ProcessMouseScroll(static_cast<float>(yoffset));
+   // camera.ProcessMouseScroll(static_cast<float>(yoffset));
+    game.player->scrollWheel(yoffset);
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -240,4 +243,32 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         camera.removeBlock();
     }
+}
+
+void loadTexture(const char* path) {
+    glActiveTexture(GL_TEXTURE0 + numTextures);
+    glBindTexture(GL_TEXTURE_2D, textures[numTextures]);
+    // set the texture wrapping parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // set texture filtering parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    // load image, create texture and generate mipmaps
+    int width, height, nrChannels;
+  //  stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+    unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
+    if (data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+    stbi_image_free(data);
+
+    numTextures++;
+
 }

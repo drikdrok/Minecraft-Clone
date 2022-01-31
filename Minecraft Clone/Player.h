@@ -13,6 +13,10 @@ public:
 		this->game = game;
 	};
 
+	int blockInHand = 1;
+
 	void update(float dt);
+
+	void scrollWheel(double yoffset);
 };
 

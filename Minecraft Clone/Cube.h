@@ -74,20 +74,41 @@ class Cube {
         }
 
         void render(int texture, glm::vec3 position, Shader* currentShader) {
+            //float angle = 0.0f;
+           // model = glm::rotate(model, glm::radians(angle), glm::vec3(0.5f, 0.5f, 1.0f));
+            
+            glBindVertexArray(VAO);
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, position);
 
+            currentShader->setMat4("model", model);
+
+            // bind textures on corresponding texture units
+
+            
+            currentShader->setInt("texture1", texture-1);
+
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+
+        void render(int texture, glm::vec3 position, Shader* currentShader, float scale, float yaw, float pitch) {
+            //float angle = 0.0f;
+           // model = glm::rotate(model, glm::radians(angle), glm::vec3(0.5f, 0.5f, 1.0f));
 
             glBindVertexArray(VAO);
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, position);
-            float angle = 0.0f;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            model = glm::scale(model, glm::vec3(scale));
+            model = glm::rotate(model, glm::radians(yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(pitch), glm::vec3(0.0f, 0.0f, 1.0f));
+
             currentShader->setMat4("model", model);
 
             // bind textures on corresponding texture units
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture);
+            currentShader->setInt("texture1", texture-1);
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
+
 
 };

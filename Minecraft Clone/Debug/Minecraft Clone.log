@@ -1,47 +1,143 @@
-﻿  World.cpp
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(125,70): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+﻿  Game.cpp
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,75): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(125,56): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,59): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(125,40): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,43): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(128,66): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,66): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(128,53): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,53): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(128,40): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,40): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(138,64): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,64): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(138,57): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,57): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(138,50): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,50): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
+  World.cpp
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,75): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,59): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,43): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,66): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,53): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,40): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,64): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,57): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,50): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  main.cpp
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,75): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,59): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(126,43): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,66): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,53): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(129,40): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,64): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,57): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(140,50): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  The contents of <filesystem> are available only with C++17 or later.
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(152,193): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Minecraft Clone.vcxproj -> C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Debug\Minecraft Clone.exe

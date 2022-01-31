@@ -17,4 +17,5 @@ void Game::update(float dt) {
 
 void Game::render(Shader* currentShader) {
 	world->render(currentShader);
+
 }

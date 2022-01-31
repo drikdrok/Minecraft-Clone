@@ -39,7 +39,7 @@ void World::render(Shader* currentShader) {
 					if (glm::vec3(x, y, z) == game->camera->lookingAt)
 						currentShader->setFloat("brightness", 1.5f);
 					
-					cube.render(1, glm::vec3(x, y, z), currentShader);
+					cube.render(blocks[x][y][z], glm::vec3(x, y, z), currentShader);
 
 					currentShader->setFloat("brightness", 1.0f);
 				}

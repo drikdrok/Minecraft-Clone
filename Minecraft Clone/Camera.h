@@ -46,6 +46,7 @@ public:
     Game* game;
 
     glm::vec3 lookingAt = glm::vec3(0, 0, 0);
+    glm::vec3 placeBlockAt = glm::vec3(0, 0, 0);
 
     // constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
@@ -122,7 +123,7 @@ public:
 
 
     void placeBlock() {
-        game->world->setBlock(lookingAt.x, lookingAt.y + 1, lookingAt.z, 1);
+        game->world->setBlock(placeBlockAt.x, placeBlockAt.y, placeBlockAt.z, game->player->blockInHand);
     }
     void removeBlock() {
         game->world->setBlock(lookingAt.x, lookingAt.y, lookingAt.z, 0);
@@ -132,8 +133,9 @@ public:
     //Locate the block the player is looking at
     void findBlockInfront() {
         glm::vec3 ray = glm::vec3(Position.x, Position.y, Position.z);
+        placeBlockAt = glm::vec3(floorf(ray.x), floorf(ray.y), floorf(ray.z));
         while (true) {
-            ray += Front * glm::vec3(0.1f, 0.1f, 0.1f);
+            ray += Front * glm::vec3(0.01f, 0.01f, 0.01f);
 
             int block = game->world->getBlock(ray.x, ray.y, ray.z);
 
@@ -145,6 +147,7 @@ public:
                 lookingAt = glm::vec3((int)ray.x, (int)ray.y, (int)ray.z);
                 return;
             }
+            placeBlockAt = glm::vec3(floorf(ray.x), floorf(ray.y), floorf(ray.z));
         }
     }
 
