@@ -8,16 +8,20 @@
 #include "shader.h"
 
 #include "World.h"
+#include "Player.h"
+
+class Camera;
 
 class Game
-
 {
 	private:
 
 	public: 
-		World world;
+		World* world;
+		Player* player;
+		Camera* camera;
 
-		void initialize();
+		void initialize(Camera* camera);
 		void update(float dt);
 		void render(Shader* currentShader);
 };

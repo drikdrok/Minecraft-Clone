@@ -122,10 +122,10 @@ public:
 
 
     void placeBlock() {
-        game->world.setBlock(lookingAt.x, lookingAt.y + 1, lookingAt.z, 1);
+        game->world->setBlock(lookingAt.x, lookingAt.y + 1, lookingAt.z, 1);
     }
     void removeBlock() {
-        game->world.setBlock(lookingAt.x, lookingAt.y, lookingAt.z, 0);
+        game->world->setBlock(lookingAt.x, lookingAt.y, lookingAt.z, 0);
     }
 
 
@@ -135,7 +135,7 @@ public:
         while (true) {
             ray += Front * glm::vec3(0.1f, 0.1f, 0.1f);
 
-            int block = game->world.getBlock(ray.x, ray.y, ray.z);
+            int block = game->world->getBlock(ray.x, ray.y, ray.z);
 
             if (block == -1) {
                 lookingAt = glm::vec3(1, 1, 1);

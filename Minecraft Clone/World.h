@@ -3,10 +3,15 @@
 #include "shader.h"
 #include "Cube.h"
 
+class Game;
+
 class World
 {
 	public:
-		World() { generate(); }
+		World(Game* game) { 
+			this->game = game;
+			generate(); 
+		}
 		void generate();
 		void render(Shader* currentShader);
 		int getBlock(int x, int y, int z);
@@ -16,6 +21,9 @@ class World
 
 	private:
 		int blocks[size][size][size] = { 0 };
+
+		Game* game;
+
 
 };
 

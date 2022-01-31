@@ -1,4 +1,6 @@
 #include "World.h"
+#include "Game.h"
+#include "Camera.h"
 
 Cube cube;
 
@@ -27,11 +29,20 @@ void World::setBlock(int x, int y, int z, int type) {
 }
 
 void World::render(Shader* currentShader) {
+
+	currentShader->setFloat("brightness", 1.0f);
+
 	for (int x = 0; x < this->size; x++) {
 		for (int y = 0; y < this->size; y++) {
 			for (int z = 0; z < this->size; z++) {
-				if (this->blocks[x][y][z] != 0)
+				if (this->blocks[x][y][z] != 0) {
+					if (glm::vec3(x, y, z) == game->camera->lookingAt)
+						currentShader->setFloat("brightness", 1.5f);
+					
 					cube.render(1, glm::vec3(x, y, z), currentShader);
+
+					currentShader->setFloat("brightness", 1.0f);
+				}
 			}
 		}
 	}

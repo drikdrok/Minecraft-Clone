@@ -116,7 +116,7 @@ int main()
     shader.setInt("texture1", 0);
 
     Game game;
-    game.initialize();
+    game.initialize(&camera);
     camera.game = &game; //todo: improve
 
 
@@ -153,7 +153,7 @@ int main()
         game.render(&shader);
 
 
-        cube.render(0, glm::vec3(camera.lookingAt.x, camera.lookingAt.y+1, camera.lookingAt.z), &shader);
+        //cube.render(0, glm::vec3(camera.lookingAt.x, camera.lookingAt.y+1, camera.lookingAt.z), &shader);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
