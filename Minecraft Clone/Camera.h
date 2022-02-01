@@ -5,6 +5,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "Game.h"
 
+#include "Cube.h"
+
 #include <vector>
 
 #include <iostream>
@@ -14,7 +16,9 @@ enum Camera_Movement {
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    UP,
+    DOWN
 };
 
 // Default camera values
@@ -23,6 +27,7 @@ const float PITCH = 0.0f;
 const float SPEED = 2.5f;
 const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
+
 
 
 // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
@@ -56,6 +61,7 @@ public:
         Yaw = yaw;
         Pitch = pitch;
         updateCameraVectors();
+
     }
     // constructor with scalar values
     Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
@@ -85,6 +91,11 @@ public:
             Position -= Right * velocity;
         if (direction == RIGHT)
             Position += Right * velocity;
+
+        if (direction == UP)
+            Position += WorldUp * velocity;
+        if (direction == DOWN)
+            Position -= WorldUp * velocity;
     }
 
     // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
@@ -131,23 +142,25 @@ public:
 
 
     //Locate the block the player is looking at
-    void findBlockInfront() {
+    void findBlockInfront(Shader* shader) {
         glm::vec3 ray = glm::vec3(Position.x, Position.y, Position.z);
         placeBlockAt = glm::vec3(floorf(ray.x), floorf(ray.y), floorf(ray.z));
+
         while (true) {
             ray += Front * glm::vec3(0.01f, 0.01f, 0.01f);
 
-            int block = game->world->getBlock(ray.x, ray.y, ray.z);
+            int block = game->world->getBlock(floorf(ray.x + 0.5f), floorf(ray.y + 0.5f), floorf(ray.z + 0.5f));
 
             if (block == -1) {
                 lookingAt = glm::vec3(1, 1, 1);
                 return;
             }
             else if (block > 0) {
-                lookingAt = glm::vec3((int)ray.x, (int)ray.y, (int)ray.z);
+                lookingAt = glm::vec3(floorf(ray.x + 0.5f), floorf(ray.y + 0.5f), floorf(ray.z + 0.5f));
+
                 return;
             }
-            placeBlockAt = glm::vec3(floorf(ray.x), floorf(ray.y), floorf(ray.z));
+            placeBlockAt = glm::vec3(floorf(ray.x + 0.5f), floorf(ray.y + 0.5f), floorf(ray.z + 0.5f));
         }
     }
 

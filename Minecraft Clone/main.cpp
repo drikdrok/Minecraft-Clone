@@ -18,6 +18,7 @@
 
 #include <iostream>
 
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -153,6 +154,10 @@ int main()
        
         cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
 
+        
+        camera.findBlockInfront(&shader);
+
+
 
 
         //cube.render(0, glm::vec3(camera.lookingAt.x, camera.lookingAt.y+1, camera.lookingAt.z), &shader);
@@ -192,6 +197,10 @@ void processInput(GLFWwindow* window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        camera.ProcessKeyboard(UP, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        camera.ProcessKeyboard(DOWN, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -224,7 +233,6 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     lastY = ypos;
 
     camera.ProcessMouseMovement(xoffset, yoffset);
-    camera.findBlockInfront();
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called

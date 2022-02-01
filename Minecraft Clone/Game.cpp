@@ -9,6 +9,7 @@ void Game::initialize(Camera* camera) {
 	player = new Player(this);
 
 	this->camera = camera;
+
 }
 
 void Game::update(float dt) {
@@ -17,5 +18,4 @@ void Game::update(float dt) {
 
 void Game::render(Shader* currentShader) {
 	world->render(currentShader);
-
 }

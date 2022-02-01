@@ -21,6 +21,7 @@ class Game
 		Player* player;
 		Camera* camera;
 
+
 		void initialize(Camera* camera);
 		void update(float dt);
 		void render(Shader* currentShader);
