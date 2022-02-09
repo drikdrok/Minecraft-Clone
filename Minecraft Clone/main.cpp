@@ -107,7 +107,7 @@ int main()
     loadTexture("gfx/textures/glass.png");
     loadTexture("gfx/textures/white_wool.png");
     loadTexture("gfx/textures/oak_planks.png");
-    loadTexture("gfx/textures/blue_wool.png");
+    loadTexture("gfx/textures/dirt.jpg");
 
     // tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
     // -------------------------------------------------------------------------------------------

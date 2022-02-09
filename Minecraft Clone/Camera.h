@@ -24,7 +24,7 @@ enum Camera_Movement {
 // Default camera values
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
-const float SPEED = 2.5f;
+const float SPEED = 4.5f;
 const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
 
@@ -96,6 +96,8 @@ public:
             Position += WorldUp * velocity;
         if (direction == DOWN)
             Position -= WorldUp * velocity;
+
+        game->player->setPosition(Position);
     }
 
     // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
@@ -118,7 +120,7 @@ public:
 
         // update Front, Right and Up Vectors using the updated Euler angles
         updateCameraVectors();
-        std::cout << "Looking At: " << lookingAt.x << ", " << lookingAt.y << ", " << lookingAt.z << std::endl;
+        //std::cout << "Looking At: " << lookingAt.x << ", " << lookingAt.y << ", " << lookingAt.z << std::endl;
 
     }
 
@@ -146,7 +148,7 @@ public:
         glm::vec3 ray = glm::vec3(Position.x, Position.y, Position.z);
         placeBlockAt = glm::vec3(floorf(ray.x), floorf(ray.y), floorf(ray.z));
 
-        while (true) {
+        for (int i = 0; i < 1000; i++) {
             ray += Front * glm::vec3(0.01f, 0.01f, 0.01f);
 
             int block = game->world->getBlock(floorf(ray.x + 0.5f), floorf(ray.y + 0.5f), floorf(ray.z + 0.5f));
@@ -162,6 +164,7 @@ public:
             }
             placeBlockAt = glm::vec3(floorf(ray.x + 0.5f), floorf(ray.y + 0.5f), floorf(ray.z + 0.5f));
         }
+        lookingAt = glm::vec3(1, 1, 1);
     }
 
 private:

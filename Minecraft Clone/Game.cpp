@@ -13,7 +13,7 @@ void Game::initialize(Camera* camera) {
 }
 
 void Game::update(float dt) {
-
+	world->update();
 }
 
 void Game::render(Shader* currentShader) {
