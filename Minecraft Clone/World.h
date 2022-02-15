@@ -41,6 +41,8 @@ class World
 		Chunk* getChunk(glm::vec3 position);
 		glm::vec3 getChunkOfBlock(glm::vec3 block);
 
+		bool chunkExists(glm::vec3 position);
+
 
 
 };
@@ -60,6 +62,13 @@ public:
 	void render(Shader* currentShader);
 	int getBlock(int x, int y, int z);
 	void setBlock(int x, int y, int z, int type);
+
+
+	std::vector<Mesh> meshes;
+
+	void update();
+
+	
 
 
 	glm::vec3 position;

@@ -53,62 +53,62 @@ const float vertices[180] = {
 };
 
 class Cube {
-    public:
-        unsigned int VBO, VAO;
-        
-        void initialize() {
-            glGenVertexArrays(1, &VAO);
-            glGenBuffers(1, &VBO);
+public:
+    unsigned int VBO, VAO;
 
-            glBindVertexArray(VAO);
+    void initialize() {
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
 
-            glBindBuffer(GL_ARRAY_BUFFER, VBO);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glBindVertexArray(VAO);
 
-            // position attribute
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-            glEnableVertexAttribArray(0);
-            // texture coord attribute
-            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-            glEnableVertexAttribArray(1);
-        }
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-        void render(int texture, glm::vec3 position, Shader* currentShader) {
-            //float angle = 0.0f;
-           // model = glm::rotate(model, glm::radians(angle), glm::vec3(0.5f, 0.5f, 1.0f));
-            
-            glBindVertexArray(VAO);
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, position);
+        // position attribute
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+        // texture coord attribute
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+    }
 
-            currentShader->setMat4("model", model);
+    void render(int texture, glm::vec3 position, Shader* currentShader) {
+        //float angle = 0.0f;
+       // model = glm::rotate(model, glm::radians(angle), glm::vec3(0.5f, 0.5f, 1.0f));
 
-            // bind textures on corresponding texture units
+        glBindVertexArray(VAO);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, position);
 
-            
-            currentShader->setInt("texture1", texture-1);
+        currentShader->setMat4("model", model);
 
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        // bind textures on corresponding texture units
 
-        void render(int texture, glm::vec3 position, Shader* currentShader, float scale, float yaw, float pitch) {
-            //float angle = 0.0f;
-           // model = glm::rotate(model, glm::radians(angle), glm::vec3(0.5f, 0.5f, 1.0f));
 
-            glBindVertexArray(VAO);
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, position);
-            model = glm::scale(model, glm::vec3(scale));
-            model = glm::rotate(model, glm::radians(yaw), glm::vec3(0.0f, 1.0f, 0.0f));
-            model = glm::rotate(model, glm::radians(pitch), glm::vec3(0.0f, 0.0f, 1.0f));
+        currentShader->setInt("texture1", texture - 1);
 
-            currentShader->setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
 
-            // bind textures on corresponding texture units
-            currentShader->setInt("texture1", texture-1);
+    void render(int texture, glm::vec3 position, Shader* currentShader, float scale, float yaw, float pitch) {
+        //float angle = 0.0f;
+       // model = glm::rotate(model, glm::radians(angle), glm::vec3(0.5f, 0.5f, 1.0f));
 
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        glBindVertexArray(VAO);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, position);
+        model = glm::scale(model, glm::vec3(scale));
+        model = glm::rotate(model, glm::radians(yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(pitch), glm::vec3(0.0f, 0.0f, 1.0f));
+
+        currentShader->setMat4("model", model);
+
+        // bind textures on corresponding texture units
+        currentShader->setInt("texture1", texture - 1);
+
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
 
 
 };

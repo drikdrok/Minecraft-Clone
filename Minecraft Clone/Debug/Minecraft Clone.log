@@ -32,62 +32,62 @@ C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(142,40)
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(154,97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(154,75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Camera.h(154,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(82,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(98,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(83,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(99,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(84,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(100,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(91,14): warning C4244: '-=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(107,14): warning C4244: '-=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(96,14): warning C4244: '-=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(112,14): warning C4244: '-=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(101,14): warning C4244: '-=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(117,14): warning C4244: '-=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(143,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(186,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(144,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(187,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(145,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(188,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(160,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(203,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(161,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(204,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(162,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(205,12): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float

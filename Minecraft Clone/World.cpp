@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include <stdlib.h>
 
+#include "Mesh.h"
+
 Cube cube;
 
 
@@ -22,7 +24,10 @@ void World::generate() {
 }
 
 int World::getBlock(int x, int y, int z) {
-	return getChunk(getChunkOfBlock(game->camera->lookingAt))->getBlock(x, y, z);
+	if (!chunkExists(glm::vec3(x, y, z)))
+		return -1;
+
+	return getChunk(getChunkOfBlock(glm::vec3(x, y, z)))->getBlock(x, y, z);
 }
 
 void World::setBlock(int x, int y, int z, int type) {
@@ -74,7 +79,18 @@ Chunk* World::getChunk(glm::vec3 position) {
 	this->chunks.push_back(chunk);
 
 
+
 	return chunk;
+}
+
+bool World::chunkExists(glm::vec3 position) {
+	for (auto& v : this->chunks) {
+		if (v->position == position) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 
@@ -117,6 +133,41 @@ void Chunk::generate(int block) {
 	}
 }
 
+void Chunk::update() {
+	for (int x = 0; x < this->size; x++) {
+		for (int y = 0; y < this->size; y++) {
+			for (int z = 0; z < this->size; z++) {
+				if (this->blocks[x][y][z] != 0) {
+					Mesh block;
+					/*if (game->world->getBlock(x - 1, y, z) <= 0)
+						block.addWestFace(x, y, z);
+
+					if (game->world->getBlock(x + 1, y, z) <= 0)
+						block.addEastFace(x, y, z);
+
+					if (game->world->getBlock(x, y + 1, z) <= 0)
+						block.addTopFace(x, y, z);
+
+					if (game->world->getBlock(x, y - 1, z) <= 0)
+						block.addBottomFace(x, y, z);
+
+					if (game->world->getBlock(x, y , z+1) <= 0)
+						block.addNorthFace(x, y, z);
+
+					if (game->world->getBlock(x, y , z-1) <= 0)
+						block.addBottomFace(x, y, z);
+						*/
+
+					block.addTopFace(1, 1, 1);
+
+					block.setupMesh();
+
+				}
+			}
+		}
+	}
+}
+
 void Chunk::render(Shader* currentShader) {
 	currentShader->setFloat("brightness", 1.0f);
 
@@ -127,7 +178,7 @@ void Chunk::render(Shader* currentShader) {
 					if (glm::vec3(position.x + x, position.y + y, position.z + z) == game->camera->lookingAt)
 						currentShader->setFloat("brightness", 1.5f);
 
-					cube.render(blocks[x][y][z], glm::vec3(position.x + x, position.y + y, position.z + z), currentShader);
+					block.render(blocks[x][y][z], glm::vec3(position.x + x, position.y + y, position.z + z), currentShader);
 
 					currentShader->setFloat("brightness", 1.0f);
 				}

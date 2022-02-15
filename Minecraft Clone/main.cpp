@@ -152,6 +152,7 @@ int main()
 
         glm::vec3 handPosition = glm::vec3(camera.Position.x, camera.Position.y, camera.Position.z) + camera.Front * 0.3f + camera.Right * 0.15f - camera.Up * 0.1f + camera.Up * std::sinf(1.3f*glfwGetTime()) * 0.01f;
        
+        shader.setFloat("brightness", 1.0f);
         cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
 
         

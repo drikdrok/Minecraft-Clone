@@ -42,6 +42,9 @@
     <ClCompile Include="HUD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -65,12 +68,21 @@
     <ClInclude Include="HUD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.glsl">
       <Filter>Shaders</Filter>
     </None>
     <None Include="vertexShader.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="worldFragment.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="worldVertex.vs">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
