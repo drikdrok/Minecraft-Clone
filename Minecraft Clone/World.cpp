@@ -112,12 +112,14 @@ void Chunk::generate(int block) {
 			this->setBlock(x, 7, z, block);
 		}
 	}
+
+	generateMesh();
 }
 
 void Chunk::render(Shader* currentShader) {
 	currentShader->setFloat("brightness", 1.0f);
 
-	for (int x = 0; x < this->size; x++) {
+	/*for (int x = 0; x < this->size; x++) {
 		for (int y = 0; y < this->size; y++) {
 			for (int z = 0; z < this->size; z++) {
 				if (this->blocks[x][y][z] != 0) {
@@ -131,6 +133,44 @@ void Chunk::render(Shader* currentShader) {
 			}
 		}
 	}
+	*/
+
+	mesh.render(1, position, currentShader);
+}
+
+void Chunk::generateMesh() {
+	mesh.reset();
+	for (int x = 0; x < this->size; x++) {
+		for (int y = 0; y < this->size; y++) {
+			for (int z = 0; z < this->size; z++) {
+				if (this->blocks[x][y][z] != 0) {
+					/*if (game->world->getBlock(x - 1, y, z) <= 0)
+						mesh.addWestFace(x, y, z);
+
+					if (game->world->getBlock(x + 1, y, z) <= 0)
+						mesh.addEastFace(x, y, z);
+
+					if (game->world->getBlock(x, y + 1, z) <= 0)
+						mesh.addTopFace(x, y, z);
+
+					if (game->world->getBlock(x, y - 1, z) <= 0)
+						mesh.addBottomFace(x, y, z);
+
+					if (game->world->getBlock(x, y, z + 1) <= 0)
+						mesh.addNorthFace(x, y, z);
+
+					if (game->world->getBlock(x, y, z - 1) <= 0)
+						mesh.addBottomFace(x, y, z);
+						*/
+
+					mesh.addTopFace(x, y, z);
+
+
+				}
+			}
+		}
+	}
+	mesh.setupMesh();
 }
 
 
@@ -185,4 +225,5 @@ void Chunk::setBlock(int x, int y, int z, int type) {
 
 
 	this->blocks[x][y][z] = type;
+	generateMesh();
 }

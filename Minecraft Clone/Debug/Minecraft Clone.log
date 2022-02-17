@@ -50,10 +50,10 @@ C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(83,8):
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(88,26): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(93,26): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(98,26): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(141,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(146,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(151,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(167,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(172,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(177,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(181,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(186,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(191,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(207,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(212,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(217,31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   Minecraft Clone.vcxproj -> C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Debug\Minecraft Clone.exe
