@@ -71,11 +71,12 @@ void Game::update(float dt) {
 void Game::render(Shader* currentShader) {
 	world->render(currentShader);
 
-
+	/*
 	Mesh mesh;
 
 	mesh.addTopFace(1, 1, 1);
 	mesh.setupMesh();
 	mesh.render(1, glm::vec3(0, 0, 0), currentShader);
+	*/
 
 }
