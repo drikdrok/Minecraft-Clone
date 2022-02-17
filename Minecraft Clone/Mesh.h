@@ -133,4 +133,8 @@ public:
     }
 
 
+    void reset() {
+        vertices = {};
+    }
+
 };

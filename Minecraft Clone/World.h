@@ -4,6 +4,8 @@
 #include "Cube.h"
 #include <vector>
 
+#include "Mesh.h"
+
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
@@ -64,9 +66,9 @@ public:
 	void setBlock(int x, int y, int z, int type);
 
 
-	std::vector<Mesh> meshes;
+	Mesh mesh;
 
-	void update();
+	void generateMesh();
 
 	
 

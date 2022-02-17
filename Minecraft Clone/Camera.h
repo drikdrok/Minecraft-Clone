@@ -50,6 +50,7 @@ public:
 
     Game* game;
 
+
     glm::vec3 lookingAt = glm::vec3(0, 0, 0);
     glm::vec3 placeBlockAt = glm::vec3(0, 0, 0);
 
@@ -61,6 +62,8 @@ public:
         Yaw = yaw;
         Pitch = pitch;
         updateCameraVectors();
+
+
 
     }
     // constructor with scalar values
@@ -141,6 +144,7 @@ public:
     void removeBlock() {
         game->world->setBlock(lookingAt.x, lookingAt.y, lookingAt.z, 0);
     }
+
 
 
     //Locate the block the player is looking at

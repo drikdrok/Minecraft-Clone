@@ -32,7 +32,9 @@ int World::getBlock(int x, int y, int z) {
 
 void World::setBlock(int x, int y, int z, int type) {
 	getChunk(getChunkOfBlock(game->camera->lookingAt))->setBlock(x, y, z, type);
+	getChunk(getChunkOfBlock(game->camera->lookingAt))->generateMesh();
 	std::cout << "Chunk of block = " << getChunk(getChunkOfBlock(game->camera->lookingAt))->position.x << ", " << getChunk(getChunkOfBlock(game->camera->lookingAt))->position.y << ", " << getChunk(getChunkOfBlock(game->camera->lookingAt))->position.z << ", " << std::endl;
+
 }
 
 void World::render(Shader* currentShader) {
@@ -131,41 +133,43 @@ void Chunk::generate(int block) {
 			this->setBlock(x, 7, z, block);
 		}
 	}
+
+	generateMesh();
 }
 
-void Chunk::update() {
+void Chunk::generateMesh() {
+	mesh.reset();
 	for (int x = 0; x < this->size; x++) {
 		for (int y = 0; y < this->size; y++) {
 			for (int z = 0; z < this->size; z++) {
 				if (this->blocks[x][y][z] != 0) {
-					Mesh block;
-					/*if (game->world->getBlock(x - 1, y, z) <= 0)
-						block.addWestFace(x, y, z);
+					if (game->world->getBlock(x - 1, y, z) <= 0)
+						mesh.addWestFace(x, y, z);
 
 					if (game->world->getBlock(x + 1, y, z) <= 0)
-						block.addEastFace(x, y, z);
+						mesh.addEastFace(x, y, z);
 
 					if (game->world->getBlock(x, y + 1, z) <= 0)
-						block.addTopFace(x, y, z);
+						mesh.addTopFace(x, y, z);
 
 					if (game->world->getBlock(x, y - 1, z) <= 0)
-						block.addBottomFace(x, y, z);
+						mesh.addBottomFace(x, y, z);
 
 					if (game->world->getBlock(x, y , z+1) <= 0)
-						block.addNorthFace(x, y, z);
+						mesh.addNorthFace(x, y, z);
 
 					if (game->world->getBlock(x, y , z-1) <= 0)
-						block.addBottomFace(x, y, z);
-						*/
+						mesh.addBottomFace(x, y, z);
 
-					block.addTopFace(1, 1, 1);
+					//mesh.addTopFace(x, y, z);
 
-					block.setupMesh();
 
 				}
 			}
 		}
 	}
+	mesh.setupMesh();
+
 }
 
 void Chunk::render(Shader* currentShader) {
@@ -178,13 +182,16 @@ void Chunk::render(Shader* currentShader) {
 					if (glm::vec3(position.x + x, position.y + y, position.z + z) == game->camera->lookingAt)
 						currentShader->setFloat("brightness", 1.5f);
 
-					block.render(blocks[x][y][z], glm::vec3(position.x + x, position.y + y, position.z + z), currentShader);
+					cube.render(blocks[x][y][z], glm::vec3(x + position.x*16, position.y + y, position.z + z), currentShader);
+
 
 					currentShader->setFloat("brightness", 1.0f);
 				}
 			}
 		}
 	}
+
+	//mesh.render(1, position, currentShader);
 }
 
 
