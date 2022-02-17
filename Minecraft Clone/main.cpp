@@ -91,6 +91,8 @@ int main()
     // ------------------------------------
     Shader shader("vertexShader.glsl", "fragmentShader.glsl");
 
+    Shader chunkShader("chunkVertex.vs", "chunkFragment.fs");
+
     Cube cube;
     cube.initialize();
 
@@ -109,10 +111,25 @@ int main()
     loadTexture("gfx/textures/oak_planks.png");
     loadTexture("gfx/textures/dirt.jpg");
 
+
+
+
+
+
+
+
+
+
+
     // tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
     // -------------------------------------------------------------------------------------------
+    chunkShader.use();
+    chunkShader.setInt("texture1", 1);
+    
     shader.use();
     shader.setInt("texture1", 1);
+
+
 
     game.initialize(&camera);
     camera.game = &game; //todo: improve
@@ -141,14 +158,20 @@ int main()
         // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         shader.setMat4("projection", projection);
+
       
         // camera/view transformation
         glm::mat4 view = camera.GetViewMatrix();
         shader.setMat4("view", view);
 
 
-        // render boxes
+        //chunkShader.use();
+        //chunkShader.setMat4("projection", projection);
+        //chunkShader.setMat4("view", view);
+        
         game.render(&shader);
+
+        shader.use();
 
         glm::vec3 handPosition = glm::vec3(camera.Position.x, camera.Position.y, camera.Position.z) + camera.Front * 0.3f + camera.Right * 0.15f - camera.Up * 0.1f + camera.Up * std::sinf(1.3f*glfwGetTime()) * 0.01f;
        

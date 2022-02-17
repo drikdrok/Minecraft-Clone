@@ -79,10 +79,10 @@
     <None Include="vertexShader.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="worldFragment.fs">
+    <None Include="chunkFragment.fs">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="worldVertex.vs">
+    <None Include="chunkVertex.vs">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
