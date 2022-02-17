@@ -155,7 +155,7 @@ int main()
         shader.setFloat("brightness", 1.0f);
         cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
 
-        cube.render(9, camera.placeBlockAt, &shader);
+        cube.render(9, camera.Position + camera.Front *0.1f, &shader, 0.001f, -camera.Yaw, camera.Pitch);
         
         camera.findBlockInfront(&shader);
 

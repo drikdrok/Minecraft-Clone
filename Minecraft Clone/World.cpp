@@ -8,12 +8,12 @@ glm::vec3 positionToChunk(glm::vec3 position) {
 }
 
 glm::vec3 positionToRelativeChunkCoords(glm::vec3 position) {
-	int x = (position.x >= 0) ? ((int)position.x % 16) : (15 + ((int)position.x % 16));
-	int y = (position.y >= 0) ? ((int)position.y % 16) : (15 + ((int)position.y % 16));
-	int z = (position.z >= 0) ? ((int)position.z % 16) : (15 + ((int)position.z % 16));
+	int x = (position.x >= 0) ? ((int)position.x % 16) : (((int)position.x % 16 == 0) ? 0 : 16 + ((int)position.x % 16));
+	int y = (position.y >= 0) ? ((int)position.y % 16) : (((int)position.y % 16 == 0) ? 0 : 16 + ((int)position.y % 16));
+	int z = (position.z >= 0) ? ((int)position.z % 16) : (((int)position.z % 16 == 0) ? 0 : 16 + ((int)position.z % 16));
 
 	return glm::vec3(x, y, z);
-}
+}	
 
 
 
@@ -34,7 +34,10 @@ void World::render(Shader* currentShader) {
 
 void World::update() {
 	glm::vec3 playerChunk = positionToChunk(game->camera->Position);
-	std::cout << "PlayerChunk: " << playerChunk.x << ", " << playerChunk.y << ", " << playerChunk.z << std::endl;
+	glm::vec3 lookingAtCoords1 = positionToChunk(game->camera->lookingAt);
+	glm::vec3 lookingAtCoords2 = positionToRelativeChunkCoords(game->camera->lookingAt);
+	//std::cout << "PlayerChunk: " << playerChunk.x << ", " << playerChunk.y << ", " << playerChunk.z << std::endl;
+	std::cout << "Look: " << game->camera->lookingAt.x << ", " << game->camera->lookingAt.y << ", " << game->camera->lookingAt.z << ";    Chunk: " << lookingAtCoords1.x << ", " << lookingAtCoords1.y << ", " << lookingAtCoords1.z << ";     Relative: " << lookingAtCoords2.x << ", " << lookingAtCoords2.y << ", " << lookingAtCoords2.z << std::endl;
 
 
 	for (int x = -renderDistance; x < renderDistance; x++) {
@@ -89,7 +92,7 @@ void Chunk::generate() {
 		for (int y = 0; y < size; y++) {
 			for (int z = 0; z < size; z++) {
 				if (y == 7)
-					blocks[x][y][z] = std::rand() % 7 + 1;
+					blocks[x][y][z] = std::rand() % 6+2;
 			}
 		}
 	}
@@ -99,26 +102,28 @@ void Chunk::generate() {
 
 void Chunk::generateMesh() {
 	mesh.reset();
+
+
 	for (int x = 0; x < size; x++) {
 		for (int y = 0; y < size; y++) {
 			for (int z = 0; z < size; z++) {
 				if (blocks[x][y][z] != 0) {
-					if (game->world->getBlock(glm::vec3(x - 1, y, z)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x - 1, position.y * 16 + y, position.z + z)) <= 0)
 						mesh.addWestFace(x, y, z);
 
-					if (game->world->getBlock(glm::vec3(x + 1, y, z)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x + 1, position.y * 16 + y, position.z + z)) <= 0)
 						mesh.addEastFace(x, y, z);
 
-					if (game->world->getBlock(glm::vec3(x, y + 1, z)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y + 1, position.z + z)) <= 0)
 						mesh.addTopFace(x, y, z);
 
-					if (game->world->getBlock(glm::vec3(x, y - 1, z)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y - 1, position.z + z)) <= 0)
 						mesh.addBottomFace(x, y, z);
 
-					if (game->world->getBlock(glm::vec3(x, y, z + 1)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y, position.z + z + 1)) <= 0)
 						mesh.addNorthFace(x, y, z);
 
-					if (game->world->getBlock(glm::vec3(x, y, z - 1)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y, position.z + z - 1)) <= 0)
 						mesh.addSouthFace(x, y, z);
 
 					//mesh.addBottomFace(x, y, z);
@@ -143,5 +148,6 @@ int Chunk::getBlock(glm::vec3 position) {
 
 void Chunk::setBlock(glm::vec3 position, int type) {
 	blocks[(int)position.x][(int)position.y][(int)position.z] = type;
-	chunk:generateMesh();
+	
+	generateMesh();
 }
