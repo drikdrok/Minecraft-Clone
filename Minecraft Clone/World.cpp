@@ -6,7 +6,6 @@
 Cube cube;
 
 
-glm::vec3 blockToChunkCoords(int x, int y, int z);
 
 int signOf(int x) {
 	if (x > 0) return 1;
@@ -82,23 +81,21 @@ glm::vec3 World::getChunkOfBlock(glm::vec3 block) {
 	int x = block.x;
 	int y = block.y;
 	int z = block.z;
-
-	glm::vec3 coords = blockToChunkCoords(x, y, z);
 	
 	if (x >= 0)
 		x -= x % 16;
 	else
-		x -= coords.x;
+		x = (ceil(x / 16) - 1) * 16;
 
 	if (y >= 0)
 		y -= y % 16;
 	else
-		y -= coords.y;
+		y = (ceil(y / 16) - 1) * 16;
 	
 	if (z >= 0)
 		z -= z % 16;
 	else
-		z -= coords.z;
+		z = (ceil(z / 16) - 1) * 16;
 
 	return glm::vec3(x, y, z);
 }
@@ -138,11 +135,20 @@ void Chunk::render(Shader* currentShader) {
 
 
 int Chunk::getBlock(int x, int y, int z) {
-	glm::vec3 coords = blockToChunkCoords(x, y, z);
+	if (x >= 0)
+		x = x % 16;
+	else
+		x = (ceil(x / 16) - 1) * 16 - x;
 
-	x = coords.x;
-	y = coords.y;
-	z = coords.z;
+	if (y >= 0)
+		y = y % 16;
+	else
+		y = (ceil(y / 16) - 1) * 16 - y;
+
+	if (z >= 0)
+		z = z % 16;
+	else
+		z = (ceil(z / 16) - 1) * 16 - z;
 
 	x = abs(x);
 	y = abs(y);
@@ -155,13 +161,20 @@ int Chunk::getBlock(int x, int y, int z) {
 }
 void Chunk::setBlock(int x, int y, int z, int type) {
 
-	glm::vec3 coords = blockToChunkCoords(x, y, z);
+	if (x >= 0)
+		x = x % 16;
+	else
+		x = (ceil(x / 16) - 1) * 16 - x;
 
-	x = coords.x;
-	y = coords.y;
-	z = coords.z;
+	if (y >= 0)
+		y = y % 16;
+	else
+		y = (ceil(y / 16) - 1) * 16 - y;
 
-	//std::cout << "Block-Chunk Coords: " << x << ", " << y << ", " << z << std::endl;
+	if (z >= 0)
+		z = z % 16;
+	else
+		z = (ceil(z / 16) - 1) * 16 - z;
 
 	x = abs(x);
 	y = abs(y);
@@ -172,28 +185,4 @@ void Chunk::setBlock(int x, int y, int z, int type) {
 
 
 	this->blocks[x][y][z] = type;
-}
-
-
-glm::vec3 blockToChunkCoords(int x, int y, int z) {
-	if (x >= 0)
-		x = x % 16;
-	else
-		x = 16 + (x % 16);
-
-	if (y >= 0)
-		y = y % 16;
-	else
-		y = 16 + (y % 16);
-
-	if (z >= 0)
-		z = z % 16;
-	else
-		z = 16 + (z % 16);
-
-	if (x == 16) x = 0;
-	if (y == 16) y = 0;
-	if (z == 16) z = 0;
-
-	return glm::vec3(x, y, z);
 }
