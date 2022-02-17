@@ -108,22 +108,22 @@ void Chunk::generateMesh() {
 		for (int y = 0; y < size; y++) {
 			for (int z = 0; z < size; z++) {
 				if (blocks[x][y][z] != 0) {
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x - 1, position.y * 16 + y, position.z + z)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x - 1, position.y * 16 + y, position.z * 16 + z)) <= 0)
 						mesh.addWestFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x + 1, position.y * 16 + y, position.z + z)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x + 1, position.y * 16 + y, position.z * 16 + z)) <= 0)
 						mesh.addEastFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y + 1, position.z + z)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y + 1, position.z * 16 + z)) <= 0)
 						mesh.addTopFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y - 1, position.z + z)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y - 1, position.z * 16 + z)) <= 0)
 						mesh.addBottomFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y, position.z + z + 1)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y, position.z * 16 + z + 1)) <= 0)
 						mesh.addNorthFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y, position.z + z - 1)) <= 0)
+					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y, position.z * 16 + z - 1)) <= 0)
 						mesh.addSouthFace(x, y, z, blocks[x][y][z]);
 
 					//mesh.addBottomFace(x, y, z);
