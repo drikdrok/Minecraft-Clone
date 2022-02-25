@@ -100,10 +100,10 @@ int main()
     // -------------------------
     // texture 1
     // ---------
-    glGenTextures(7, &textures[numTextures]);
+    glGenTextures(1, &textures[numTextures]);
 
 
-    loadTexture("gfx/textures/cobblestone.png");
+   /* loadTexture("gfx/textures/cobblestone.png");
     loadTexture("gfx/textures/dirt.png");
     loadTexture("gfx/textures/mossy_cobblestone.png");
     loadTexture("gfx/textures/glass.png");
@@ -111,10 +111,38 @@ int main()
     loadTexture("gfx/textures/oak_planks.png");
     loadTexture("gfx/textures/dirt.jpg");
 
+    */
 
 
+    //loadTexture("gfx/textures/cobblestone.png");
 
 
+    unsigned int texture1, texture2;
+    // texture 1
+    // ---------
+    glGenTextures(1, &texture1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    // set the texture wrapping parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // set texture filtering parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    // load image, create texture and generate mipmaps
+    int width, height, nrChannels;
+    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+    unsigned char* data = stbi_load("gfx/textures/sheet.png", &width, &height, &nrChannels, 0);
+    if (data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+    stbi_image_free(data);
 
 
 
@@ -123,12 +151,10 @@ int main()
 
     // tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
     // -------------------------------------------------------------------------------------------
-    chunkShader.use();
-    chunkShader.setInt("texture1", 1);
-    
     shader.use();
-    shader.setInt("texture1", 1);
+    shader.setInt("texture1", 0);
 
+    Mesh blockInHand;
 
 
     game.initialize(&camera);
@@ -176,7 +202,14 @@ int main()
         glm::vec3 handPosition = glm::vec3(camera.Position.x, camera.Position.y, camera.Position.z) + camera.Front * 0.3f + camera.Right * 0.15f - camera.Up * 0.1f + camera.Up * std::sinf(1.3f*glfwGetTime()) * 0.01f;
        
         shader.setFloat("brightness", 1.0f);
-        cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
+       
+        blockInHand.reset();
+        blockInHand.addFullBlock(0, 0, 0, game.player->blockInHand);
+        blockInHand.setupMesh();
+
+        blockInHand.render(handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch);
+        
+       // cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
 
         cube.render(9, camera.Position + camera.Front *0.1f, &shader, 0.001f, -camera.Yaw, camera.Pitch);
         

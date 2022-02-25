@@ -37,7 +37,7 @@ void World::update() {
 	glm::vec3 lookingAtCoords1 = positionToChunk(game->camera->lookingAt);
 	glm::vec3 lookingAtCoords2 = positionToRelativeChunkCoords(game->camera->lookingAt);
 	//std::cout << "PlayerChunk: " << playerChunk.x << ", " << playerChunk.y << ", " << playerChunk.z << std::endl;
-	std::cout << "Look: " << game->camera->lookingAt.x << ", " << game->camera->lookingAt.y << ", " << game->camera->lookingAt.z << ";    Chunk: " << lookingAtCoords1.x << ", " << lookingAtCoords1.y << ", " << lookingAtCoords1.z << ";     Relative: " << lookingAtCoords2.x << ", " << lookingAtCoords2.y << ", " << lookingAtCoords2.z << std::endl;
+	//std::cout << "Look: " << game->camera->lookingAt.x << ", " << game->camera->lookingAt.y << ", " << game->camera->lookingAt.z << ";    Chunk: " << lookingAtCoords1.x << ", " << lookingAtCoords1.y << ", " << lookingAtCoords1.z << ";     Relative: " << lookingAtCoords2.x << ", " << lookingAtCoords2.y << ", " << lookingAtCoords2.z << std::endl;
 
 
 	for (int x = -renderDistance; x < renderDistance; x++) {
@@ -137,7 +137,7 @@ void Chunk::generateMesh() {
 void Chunk::render(Shader* currentShader) {
 	currentShader->setFloat("brightness", 1.0f);
 
-	mesh.render(blocks[0][7][0], glm::vec3(position.x * 16, position.y * 16, position.z * 16), currentShader);
+	mesh.render(glm::vec3(position.x * 16, position.y * 16, position.z * 16), currentShader);
 
 }
 
@@ -150,4 +150,15 @@ void Chunk::setBlock(glm::vec3 position, int type) {
 	blocks[(int)position.x][(int)position.y][(int)position.z] = type;
 	
 	generateMesh();
+
+	/*for (int x = -1; x < 1; x++) {
+		for (int y = -1; y < 1; y++) {
+			for (int z = -1; z < 1; z++) {
+				if (!game->world->chunkExists(glm::vec3(position.x + x, position.y + y, position.z + z))) {
+					game->world->getChunk(glm::vec3(position.x + x, position.y + y, position.z + z))->generateMesh();
+				}
+			}
+		}
+	}
+	*/
 }

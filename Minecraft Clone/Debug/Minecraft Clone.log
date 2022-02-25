@@ -1,8 +1,24 @@
-﻿  World.cpp
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(24,28): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+﻿  Game.cpp
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(26,28): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
           with
           [
               _Ty=float
           ]
+  World.cpp
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(26,28): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+  main.cpp
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(26,28): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+  The contents of <filesystem> are available only with C++17 or later.
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(202,193): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(120,28): warning C4101: 'texture2': unreferenced local variable
+  Generating Code...
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(66): warning C4715: 'World::getChunk': not all control paths return a value
   Minecraft Clone.vcxproj -> C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Debug\Minecraft Clone.exe

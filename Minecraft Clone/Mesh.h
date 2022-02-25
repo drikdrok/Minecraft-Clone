@@ -13,6 +13,8 @@ class Mesh {
 public:
     unsigned int VBO, VAO;
 
+    bool initialized = false;
+
     std::vector<float> vertices;
 
     void addVertex(float x, float y, float z, float t1, float t2, int type) {
@@ -79,7 +81,16 @@ public:
 
     }
 
-    void setupMesh() {
+    void addFullBlock(int x, int y, int z, int type) {
+        addNorthFace(x, y, z, type);
+        addSouthFace(x, y, z, type);
+        addWestFace(x, y, z, type);
+        addEastFace(x, y, z, type);
+        addBottomFace(x, y, z, type);
+        addTopFace(x, y, z, type);
+    }
+
+    void initialize() {
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
 
@@ -94,32 +105,44 @@ public:
         // texture coord attribute
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(4 * sizeof(float)));
+        glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(5 * sizeof(float)));
+        glEnableVertexAttribArray(2);
+
+        initialized = true;
+    }
+
+    void setupMesh() {
+        if (!initialized) {
+            initialize();
+            return;
+        }
+
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
+
+        // position attribute
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+        // texture coord attribute
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(5 * sizeof(float)));
         glEnableVertexAttribArray(2);
     }
 
-    void render(int texture, glm::vec3 position, Shader* currentShader) {
-        //float angle = 0.0f;
-       // model = glm::rotate(model, glm::radians(angle), glm::vec3(0.5f, 0.5f, 1.0f));
-
+    void render(glm::vec3 position, Shader* currentShader) {
         glBindVertexArray(VAO);
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, position);
 
         currentShader->setMat4("model", model);
 
-        // bind textures on corresponding texture units
+        currentShader->setInt("texture1", 0);
 
-
-        currentShader->setInt("texture1", texture - 1);
-
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 5);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 6);
     }
 
-    void render(int texture, glm::vec3 position, Shader* currentShader, float scale, float yaw, float pitch) {
-        //float angle = 0.0f;
-       // model = glm::rotate(model, glm::radians(angle), glm::vec3(0.5f, 0.5f, 1.0f));
-
+    void render(glm::vec3 position, Shader* currentShader, float scale, float yaw, float pitch) {
         glBindVertexArray(VAO);
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, position);
@@ -130,14 +153,14 @@ public:
         currentShader->setMat4("model", model);
 
         // bind textures on corresponding texture units
-        currentShader->setInt("texture1", texture - 1);
+        currentShader->setInt("texture1", 0);
 
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 5);
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 6);
     }
 
 
     void reset() {
-        vertices = {};
+        vertices.clear();
     }
 
 };
