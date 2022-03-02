@@ -160,6 +160,8 @@ int main()
     game.initialize(&camera);
     camera.game = &game; //todo: improve
 
+    float timer = 0; 
+
 
     // render loop
     // -----------
@@ -215,6 +217,12 @@ int main()
         
         camera.findBlockInfront(&shader);
 
+
+        timer += deltaTime;
+        if (timer >= 1) {
+            timer = 0;
+            std::cout << "FPS: " << 1 / deltaTime << std::endl;
+        }
 
 
 

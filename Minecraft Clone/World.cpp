@@ -49,6 +49,14 @@ void World::update() {
 			}
 		}
 	}
+
+
+	int amountToUpdate = (chunkUpdates.size() > 1) ? 1 : chunkUpdates.size();
+	for (int i = 0; i < amountToUpdate; i++) {
+		Chunk* c = chunkUpdates.front();
+		chunkUpdates.pop_front();
+		c->generateMesh();
+	}
 }
 
 bool World::chunkExists(glm::vec3 position) {
@@ -80,6 +88,14 @@ void World::setBlock(glm::vec3 position, int type) {
 	c->setBlock(positionToRelativeChunkCoords(position), type);
 }
 
+void World::addChunkUpdate(Chunk* c) {
+
+	//Check to make sure chunk is not already in deque
+	std::deque<Chunk*>::iterator it = std::find(chunkUpdates.begin(), chunkUpdates.end(), c);
+	if (it == chunkUpdates.end())
+		chunkUpdates.push_back(c);
+}
+
 
 
 
@@ -97,7 +113,8 @@ void Chunk::generate() {
 		}
 	}
 
-	generateMesh();
+	//generateMesh();
+	game->world->addChunkUpdate(this);
 }
 
 void Chunk::generateMesh() {
@@ -151,14 +168,14 @@ void Chunk::setBlock(glm::vec3 position, int type) {
 	
 	generateMesh();
 
-	/*for (int x = -1; x < 1; x++) {
-		for (int y = -1; y < 1; y++) {
-			for (int z = -1; z < 1; z++) {
-				if (!game->world->chunkExists(glm::vec3(position.x + x, position.y + y, position.z + z))) {
-					game->world->getChunk(glm::vec3(position.x + x, position.y + y, position.z + z))->generateMesh();
+	for (int x = -1; x <= 1; x++) {
+		for (int y = -1; y <= 1; y++) {
+			for (int z = -1; z <= 1; z++) {
+				if (game->world->chunkExists(glm::vec3(this->position.x + x, this->position.y + y, this->position.z + z))) {
+					 //game->world->getChunk(glm::vec3(position.x + x, position.y + y, position.z + z))->generateMesh();
+					game->world->addChunkUpdate(game->world->getChunk(glm::vec3(this->position.x + x, this->position.y + y, this->position.z + z)));
 				}
 			}
 		}
 	}
-	*/
 }

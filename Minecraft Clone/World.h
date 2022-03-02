@@ -6,6 +6,8 @@
 
 #include "Mesh.h"
 
+#include <deque>
+
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
@@ -27,6 +29,8 @@ class World
 
 		int getBlock(glm::vec3 position);
 
+		void addChunkUpdate(Chunk* c);
+
 
 		bool chunkExists(glm::vec3 position);
 
@@ -37,10 +41,9 @@ class World
 	private:
 		Game* game;
 
-		int renderDistance = 2;
+		int renderDistance = 3;
 
-
-
+		std::deque<Chunk*> chunkUpdates;
 
 		std::vector<Chunk*> chunks;
 
@@ -64,6 +67,7 @@ public:
 	void setBlock(glm::vec3 position, int type);
 
 	glm::vec3 position;
+	void generateMesh();
 
 
 
@@ -76,7 +80,6 @@ private:
 
 	Mesh mesh;
 
-	void generateMesh();
 
 
 };
