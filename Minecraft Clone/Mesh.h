@@ -11,13 +11,16 @@
 
 class Mesh {
 public:
-    unsigned int VBO, VAO;
+    unsigned int VBO, VAO, EBO;
 
     bool initialized = false;
 
     std::vector<float> vertices;
+    std::vector<int> indices;
 
     float shadeAmount = 0.2f;
+
+    int iVertex = 0;
 
     void addVertex(float x, float y, float z, float t1, float t2, int type, float brightness) {
         vertices.push_back(x);
@@ -33,54 +36,100 @@ public:
         addVertex(x, y, z + 1.0f, 0.0f, 0.0f, type, brightness);
         addVertex(x + 1.0f, y, z + 1.0f, 1.0f, 0.0f, type, brightness);
         addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 1.0f, type, brightness);
-        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 1.0f, type, brightness);
         addVertex(x, y + 1.0f, z + 1.0f, 0.0f, 1.0f, type, brightness);
-        addVertex(x, y, z + 1.0f, 0.0f, 0.0f, type, brightness);
+
+        indices.push_back(iVertex);
+        indices.push_back(iVertex + 1);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 3);
+        indices.push_back(iVertex);
+
+        iVertex += 4;
     }
 
     void addSouthFace(int x, int y, int z, int type, int brightness) {
         addVertex(x, y, z, 0.0f, 0.0f, type, brightness - shadeAmount);
         addVertex(x + 1.0f, y, z, 1.0f, 0.0f, type, brightness - shadeAmount);
         addVertex(x + 1.0f, y + 1.0f, z, 1.0f, 1.0f, type, brightness - shadeAmount);
-        addVertex(x + 1.0f, y + 1.0f, z, 1.0f, 1.0f, type, brightness - shadeAmount);
         addVertex(x, y + 1.0f, z, 0.0f, 1.0f, type, brightness - shadeAmount);
-        addVertex(x, y, z, 0.0f, 0.0f, type, brightness - shadeAmount);
+        
+        indices.push_back(iVertex);
+        indices.push_back(iVertex + 1);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 3);
+        indices.push_back(iVertex);
+        
+        iVertex += 4;
     }
 
     void addWestFace(int x, int y, int z, int type, int brightness) {
         addVertex(x, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type, brightness - shadeAmount);
         addVertex(x, y + 1.0f, z, 1.0f, 1.0f, type, brightness - shadeAmount);
         addVertex(x, y, z, 0.0f, 1.0f, type, brightness - shadeAmount);
-        addVertex(x, y, z, 0.0f, 1.0f, type, brightness - shadeAmount);
         addVertex(x, y, z + 1.0f, 0.0f, 0.0f, type, brightness - shadeAmount);
-        addVertex(x, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type, brightness - shadeAmount);
+
+        indices.push_back(iVertex);
+        indices.push_back(iVertex + 1);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 3);
+        indices.push_back(iVertex);
+
+        iVertex += 4;
     }
 
     void addEastFace(int x, int y, int z, int type, int brightness) {
         addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type, brightness);
         addVertex(x + 1.0f, y + 1.0f, z, 1.0f, 1.0f, type, brightness);
         addVertex(x + 1.0f, y, z, 0.0f, 1.0f, type, brightness);
-        addVertex(x + 1.0f, y, z, 0.0f, 1.0f, type, brightness);
         addVertex(x + 1.0f, y, z + 1.0f, 0.0f, 0.0f, type, brightness);
-        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type, brightness);
+
+
+        indices.push_back(iVertex);
+        indices.push_back(iVertex + 1);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 3);
+        indices.push_back(iVertex);
+
+        iVertex += 4;
+
     }
 
     void addTopFace(int x, int y, int z, int type, int brightness) {
         addVertex(x, y + 1.0f, z, 0.0f, 1.0f, type, brightness);
         addVertex(x + 1.0f, y + 1.0f, z, 1.0f, 1.0f, type, brightness);
         addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type, brightness);
-        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type, brightness);
         addVertex(x, y + 1.0f, z + 1.0f, 0.0f, 0.0f, type, brightness);
-        addVertex(x, y + 1.0f, z, 0.0f, 1.0f, type, brightness);
+
+
+        indices.push_back(iVertex);
+        indices.push_back(iVertex + 1);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 3);
+        indices.push_back(iVertex);
+
+        iVertex += 4;
     }
 
     void addBottomFace(int x, int y, int z, int type, int brightness) {
         addVertex(x, y, z, 0.0f, 1.0f, type, brightness - shadeAmount);
         addVertex(x + 1.0f, y, z, 1.0f, 1.0f, type, brightness - shadeAmount);
         addVertex(x + 1.0f, y, z + 1.0f, 1.0f, 0.0f, type, brightness - shadeAmount);
-        addVertex(x + 1.0f, y, z + 1.0f, 1.0f, 0.0f, type, brightness - shadeAmount);
         addVertex(x, y, z + 1.0f, 0.0f, 0.0f, type, brightness - shadeAmount);
-        addVertex(x, y, z, 0.0f, 1.0f, type, brightness - shadeAmount);
+
+
+        indices.push_back(iVertex);
+        indices.push_back(iVertex + 1);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 2);
+        indices.push_back(iVertex + 3);
+        indices.push_back(iVertex);
+
+        iVertex += 4;
 
     }
 
@@ -96,11 +145,14 @@ public:
     void initialize() {
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
+        glGenBuffers(1, &EBO);
 
         glBindVertexArray(VAO);
-
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(int), &indices[0], GL_STATIC_DRAW);
 
         // position attribute
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
@@ -131,6 +183,9 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
 
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(int), &indices[0], GL_STATIC_DRAW);
+
         // position attribute
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
@@ -158,7 +213,7 @@ public:
 
         //currentShader->setInt("texture1", 0);
 
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 6);
+        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     }
 
     void render(glm::vec3 position, Shader* currentShader, float scale, float yaw, float pitch) {
@@ -178,12 +233,15 @@ public:
         // bind textures on corresponding texture units
        // currentShader->setInt("texture1", 0);
 
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 6);
+        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     }
 
 
     void reset() {
         vertices.clear();
+        indices.clear();
+        iVertex = 0;
+
     }
 
 };
