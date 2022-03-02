@@ -127,17 +127,13 @@ void Chunk::generate() {
 
 	for (int x = 0; x < size; x++) {
 		for (int z = 0; z < size; z++) {
-			//std::cout << x1 << std::endl;
 			int heightGlobal = game->world->getHeightOfBlock(abs(position.x * 16 + x), abs(position.z * 16 + z)) ;
 			int heightRelative = heightGlobal - position.y * 16;
-
-			//std::cout << height << std::endl;
-
+			
 			if (heightRelative < 0)
 				continue;
-
-
-		//	std::cout << height << std::endl;
+			
+			
 			for (int y = (heightRelative > 15) ? 15 : heightRelative; y >= 0; y--) {
 				int block = (heightGlobal > 5) ? 2 : 7;
 
