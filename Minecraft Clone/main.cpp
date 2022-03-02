@@ -148,11 +148,10 @@ int main()
     // tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
     // -------------------------------------------------------------------------------------------
     shader.use();
-    shader.setInt("texture1", 0);
 
     Mesh blockInHand;
 
-    blockInHand.addFullBlock(0, 0, 0, 1);
+    blockInHand.addFullBlock(0, 0, 0, 1, 1.0f);
     blockInHand.setupMesh();
 
 
@@ -205,7 +204,7 @@ int main()
         shader.setFloat("brightness", 1.0f);
        
         blockInHand.reset();
-        blockInHand.addFullBlock(0, 0, 0, game.player->blockInHand);
+        blockInHand.addFullBlock(0, 0, 0, game.player->blockInHand, 1.0f);
         blockInHand.setupMesh();
 
         blockInHand.render(handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch);

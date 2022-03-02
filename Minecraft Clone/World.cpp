@@ -75,7 +75,7 @@ bool World::chunkExists(glm::vec3 position) {
 }
 
 Chunk* World::getChunk(glm::vec3 position) {
-	for (auto& chunk : chunks)
+	for (Chunk* chunk : chunks)
 		if (chunk->position == position)
 			return chunk;
 }
@@ -165,22 +165,22 @@ void Chunk::generateMesh() {
 			for (int z = 0; z < size; z++) {
 				if (blocks[x][y][z] != 0) {
 					if (getBlock(glm::vec3(x - 1, y, z)) <= 0)
-						mesh.addWestFace(x, y, z, blocks[x][y][z]);
+						mesh.addWestFace(x, y, z, blocks[x][y][z], 1.0f);
 
 					if (getBlock(glm::vec3(x + 1, y, z)) <= 0)
-						mesh.addEastFace(x, y, z, blocks[x][y][z]);
+						mesh.addEastFace(x, y, z, blocks[x][y][z], 1.0f);
 
 					if (getBlock(glm::vec3(x, y + 1, z)) <= 0)
-						mesh.addTopFace(x, y, z, blocks[x][y][z]);
+						mesh.addTopFace(x, y, z, blocks[x][y][z], 1.0f);
 
 					if (getBlock(glm::vec3(x, y - 1, z)) <= 0)
-						mesh.addBottomFace(x, y, z, blocks[x][y][z]);
+						mesh.addBottomFace(x, y, z, blocks[x][y][z], 1.0f);
 
 					if (getBlock(glm::vec3(x, y, z + 1)) <= 0)
-						mesh.addNorthFace(x, y, z, blocks[x][y][z]);
+						mesh.addNorthFace(x, y, z, blocks[x][y][z], 1.0f);
 
 					if (getBlock(glm::vec3(x, y, z - 1)) <= 0)
-						mesh.addSouthFace(x, y, z, blocks[x][y][z]);
+						mesh.addSouthFace(x, y, z, blocks[x][y][z], 1.0f);
 
 					//mesh.addBottomFace(x, y, z);
 				}
@@ -198,7 +198,7 @@ void Chunk::generateMesh() {
 }
 
 void Chunk::render(Shader* currentShader) {
-	currentShader->setFloat("brightness", 1.0f);
+	//currentShader->setFloat("brightness", 1.0f);
 
 	mesh.render(glm::vec3(position.x * 16, position.y * 16, position.z * 16), currentShader);
 
@@ -217,7 +217,7 @@ void Chunk::setBlock(glm::vec3 position, int type) {
 	
 	generateMesh();
 
-	/*for (int x = -1; x <= 1; x++) {
+	for (int x = -1; x <= 1; x++) {
 		for (int y = -1; y <= 1; y++) {
 			for (int z = -1; z <= 1; z++) {
 				if (game->world->chunkExists(glm::vec3(this->position.x + x, this->position.y + y, this->position.z + z))) {
@@ -227,5 +227,4 @@ void Chunk::setBlock(glm::vec3 position, int type) {
 			}
 		}
 	}
-	*/
 }
