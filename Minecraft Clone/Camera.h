@@ -22,7 +22,7 @@ enum Camera_Movement {
 // Default camera values
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
-const float SPEED = 4.5f;
+const float SPEED = 6.5f;
 const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
 
@@ -154,18 +154,18 @@ public:
         for (int i = 0; i < 1000; i++) {
             ray += Front * glm::vec3(0.01f, 0.01f, 0.01f);
 
-            int block = game->world->getBlock(glm::vec3(floorf(ray.x + 0.5f), floorf(ray.y + 0.5f), floorf(ray.z + 0.5f)));
+            int block = game->world->getBlock(glm::vec3(floorf(ray.x), floorf(ray.y), floorf(ray.z)));
 
             if (block == -1) {
                 lookingAt = glm::vec3(1, 1, 1);
                 return;
             }
             else if (block > 0) {
-                lookingAt = glm::vec3(floorf(ray.x + 0.5f), floorf(ray.y + 0.5f), floorf(ray.z + 0.5f));
+                lookingAt = glm::vec3(floorf(ray.x), floorf(ray.y), floorf(ray.z));
 
                 return;
             }
-            placeBlockAt = glm::vec3(floorf(ray.x + 0.5f), floorf(ray.y + 0.5f), floorf(ray.z + 0.5f));
+            placeBlockAt = glm::vec3(floorf(ray.x), floorf(ray.y), floorf(ray.z));
         }
         lookingAt = glm::vec3(1, 1, 1);
     }

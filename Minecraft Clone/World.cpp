@@ -158,27 +158,28 @@ void Chunk::generate() {
 void Chunk::generateMesh() {
 	mesh.reset();
 
+	//float timeStart = static_cast<float>(glfwGetTime());
 
 	for (int x = 0; x < size; x++) {
 		for (int y = 0; y < size; y++) {
 			for (int z = 0; z < size; z++) {
 				if (blocks[x][y][z] != 0) {
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x - 1, position.y * 16 + y, position.z * 16 + z)) <= 0)
+					if (getBlock(glm::vec3(x - 1, y, z)) <= 0)
 						mesh.addWestFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x + 1, position.y * 16 + y, position.z * 16 + z)) <= 0)
+					if (getBlock(glm::vec3(x + 1, y, z)) <= 0)
 						mesh.addEastFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y + 1, position.z * 16 + z)) <= 0)
+					if (getBlock(glm::vec3(x, y + 1, z)) <= 0)
 						mesh.addTopFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y - 1, position.z * 16 + z)) <= 0)
+					if (getBlock(glm::vec3(x, y - 1, z)) <= 0)
 						mesh.addBottomFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y, position.z * 16 + z + 1)) <= 0)
+					if (getBlock(glm::vec3(x, y, z + 1)) <= 0)
 						mesh.addNorthFace(x, y, z, blocks[x][y][z]);
 
-					if (game->world->getBlock(glm::vec3(position.x * 16 + x, position.y * 16 + y, position.z * 16 + z - 1)) <= 0)
+					if (getBlock(glm::vec3(x, y, z - 1)) <= 0)
 						mesh.addSouthFace(x, y, z, blocks[x][y][z]);
 
 					//mesh.addBottomFace(x, y, z);
@@ -186,7 +187,14 @@ void Chunk::generateMesh() {
 			}
 		}
 	}
+
+	//std::cout << "Time to generate mesh: " << static_cast<float>(glfwGetTime()) - timeStart << std::endl;
+	//timeStart = static_cast<float>(glfwGetTime());
+
 	mesh.setupMesh();
+
+	//std::cout << "Time to setup mesh: " << static_cast<float>(glfwGetTime()) - timeStart << std::endl;
+
 }
 
 void Chunk::render(Shader* currentShader) {
@@ -197,8 +205,11 @@ void Chunk::render(Shader* currentShader) {
 }
 
 
-int Chunk::getBlock(glm::vec3 position) {
-	return blocks[(int)position.x][(int)position.y][(int)position.z];
+int Chunk::getBlock(glm::vec3 p) {
+	if (p.x < 0 || p.x > 15 || p.y < 0 || p.y > 15 || p.z < 0 || p.z > 15)
+		return game->world->getBlock(glm::vec3(position.x * 16 + p.x, position.y * 16 + p.y, position.z * 16 + p.z));
+
+	return blocks[(int)p.x][(int)p.y][(int)p.z];
 }
 
 void Chunk::setBlock(glm::vec3 position, int type) {

@@ -27,57 +27,57 @@ public:
     }
 
     void addNorthFace(int x, int y, int z, int type) {
-        addVertex(x - 0.5f, y - 0.5f, z + 0.5f, 0.0f, 0.0f, type);
-        addVertex(x + 0.5f, y - 0.5f, z + 0.5f, 1.0f, 0.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z + 0.5f, 1.0f, 1.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z + 0.5f, 1.0f, 1.0f, type);
-        addVertex(x - 0.5f, y + 0.5f, z + 0.5f, 0.0f, 1.0f, type);
-        addVertex(x - 0.5f, y - 0.5f, z + 0.5f, 0.0f, 0.0f, type);
+        addVertex(x, y, z + 1.0f, 0.0f, 0.0f, type);
+        addVertex(x + 1.0f, y, z + 1.0f, 1.0f, 0.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 1.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 1.0f, type);
+        addVertex(x, y + 1.0f, z + 1.0f, 0.0f, 1.0f, type);
+        addVertex(x, y, z + 1.0f, 0.0f, 0.0f, type);
     }
 
     void addSouthFace(int x, int y, int z, int type) {
-        addVertex(x - 0.5f, y - 0.5f, z - 0.5f, 0.0f, 0.0f, type);
-        addVertex(x + 0.5f, y - 0.5f, z - 0.5f, 1.0f, 0.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z - 0.5f, 1.0f, 1.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z - 0.5f, 1.0f, 1.0f, type);
-        addVertex(x - 0.5f, y + 0.5f, z - 0.5f, 0.0f, 1.0f, type);
-        addVertex(x - 0.5f, y - 0.5f, z - 0.5f, 0.0f, 0.0f, type);
+        addVertex(x, y, z, 0.0f, 0.0f, type);
+        addVertex(x + 1.0f, y, z, 1.0f, 0.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z, 1.0f, 1.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z, 1.0f, 1.0f, type);
+        addVertex(x, y + 1.0f, z, 0.0f, 1.0f, type);
+        addVertex(x, y, z, 0.0f, 0.0f, type);
     }
 
     void addWestFace(int x, int y, int z, int type) {
-        addVertex(x - 0.5f, y + 0.5f, z + 0.5f, 1.0f, 0.0f, type);
-        addVertex(x - 0.5f, y + 0.5f, z - 0.5f, 1.0f, 1.0f, type);
-        addVertex(x - 0.5f, y - 0.5f, z - 0.5f, 0.0f, 1.0f, type);
-        addVertex(x - 0.5f, y - 0.5f, z - 0.5f, 0.0f, 1.0f, type);
-        addVertex(x - 0.5f, y - 0.5f, z + 0.5f, 0.0f, 0.0f, type);
-        addVertex(x - 0.5f, y + 0.5f, z + 0.5f, 1.0f, 0.0f, type);
+        addVertex(x, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type);
+        addVertex(x, y + 1.0f, z, 1.0f, 1.0f, type);
+        addVertex(x, y, z, 0.0f, 1.0f, type);
+        addVertex(x, y, z, 0.0f, 1.0f, type);
+        addVertex(x, y, z + 1.0f, 0.0f, 0.0f, type);
+        addVertex(x, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type);
     }
 
     void addEastFace(int x, int y, int z, int type) {
-        addVertex(x + 0.5f, y + 0.5f, z + 0.5f, 1.0f, 0.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z - 0.5f, 1.0f, 1.0f, type);
-        addVertex(x + 0.5f, y - 0.5f, z - 0.5f, 0.0f, 1.0f, type);
-        addVertex(x + 0.5f, y - 0.5f, z - 0.5f, 0.0f, 1.0f, type);
-        addVertex(x + 0.5f, y - 0.5f, z + 0.5f, 0.0f, 0.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z + 0.5f, 1.0f, 0.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z, 1.0f, 1.0f, type);
+        addVertex(x + 1.0f, y, z, 0.0f, 1.0f, type);
+        addVertex(x + 1.0f, y, z, 0.0f, 1.0f, type);
+        addVertex(x + 1.0f, y, z + 1.0f, 0.0f, 0.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type);
     }
 
     void addTopFace(int x, int y, int z, int type) {
-        addVertex(x - 0.5f, y + 0.5f, z - 0.5f, 0.0f, 1.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z - 0.5f, 1.0f, 1.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z + 0.5f, 1.0f, 0.0f, type);
-        addVertex(x + 0.5f, y + 0.5f, z + 0.5f, 1.0f, 0.0f, type);
-        addVertex(x - 0.5f, y + 0.5f, z + 0.5f, 0.0f, 0.0f, type);
-        addVertex(x - 0.5f, y + 0.5f, z - 0.5f, 0.0f, 1.0f, type);
+        addVertex(x, y + 1.0f, z, 0.0f, 1.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z, 1.0f, 1.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type);
+        addVertex(x + 1.0f, y + 1.0f, z + 1.0f, 1.0f, 0.0f, type);
+        addVertex(x, y + 1.0f, z + 1.0f, 0.0f, 0.0f, type);
+        addVertex(x, y + 1.0f, z, 0.0f, 1.0f, type);
     }
 
     void addBottomFace(int x, int y, int z, int type) {
-        addVertex(x - 0.5f, y - 0.5f, z - 0.5f, 0.0f, 1.0f, type);
-        addVertex(x + 0.5f, y - 0.5f, z - 0.5f, 1.0f, 1.0f, type);
-        addVertex(x + 0.5f, y - 0.5f, z + 0.5f, 1.0f, 0.0f, type);
-        addVertex(x + 0.5f, y - 0.5f, z + 0.5f, 1.0f, 0.0f, type);
-        addVertex(x - 0.5f, y - 0.5f, z + 0.5f, 0.0f, 0.0f, type);
-        addVertex(x - 0.5f, y - 0.5f, z - 0.5f, 0.0f, 1.0f, type);
+        addVertex(x, y, z, 0.0f, 1.0f, type);
+        addVertex(x + 1.0f, y, z, 1.0f, 1.0f, type);
+        addVertex(x + 1.0f, y, z + 1.0f, 1.0f, 0.0f, type);
+        addVertex(x + 1.0f, y, z + 1.0f, 1.0f, 0.0f, type);
+        addVertex(x, y, z + 1.0f, 0.0f, 0.0f, type);
+        addVertex(x, y, z, 0.0f, 1.0f, type);
 
     }
 
