@@ -103,8 +103,8 @@ void World::addChunkUpdate(Chunk* c) {
 		chunkUpdates.push_back(c);
 }
 
-int World::getHeightOfBlock(int a, int b) {
-	return abs(floor(noise.GetNoise((float)a, (float)b) * 16));
+int World::getHeightOfBlock(int x, int z) {
+	return abs(floor(noise.GetNoise((float)x, (float)z) * 30));
 }
 
 
@@ -125,23 +125,28 @@ void Chunk::generate() {
 	}
 	*/
 
-	if (position.y == 0) {
-		for (int x = 0; x < size; x++) {
-			for (int z = 0; z < size; z++) {
-				int x1 = position.x * 16 + x;
-				int x2 = position.z * 16 + z;
-				//std::cout << x1 << std::endl;
-				int height = game->world->getHeightOfBlock(abs(x1), abs(x2));
-			//	std::cout << height << std::endl;
-				for (int y = height; y > 0; y--) {
-					int block = 2;
-					if (y < height - 4)
-						block = 1;
-					else if (y < height)
-						block = 3;
+	for (int x = 0; x < size; x++) {
+		for (int z = 0; z < size; z++) {
+			//std::cout << x1 << std::endl;
+			int heightGlobal = game->world->getHeightOfBlock(abs(position.x * 16 + x), abs(position.z * 16 + z)) ;
+			int heightRelative = heightGlobal - position.y * 16;
 
-					blocks[x][y][z] = block;
-				}
+			//std::cout << height << std::endl;
+
+			if (heightRelative < 0)
+				continue;
+
+
+		//	std::cout << height << std::endl;
+			for (int y = (heightRelative > 15) ? 15 : heightRelative; y >= 0; y--) {
+				int block = (heightGlobal > 5) ? 2 : 7;
+
+				if (y < heightRelative - 4)
+					block = 1;
+				else if (y < heightRelative)
+					block = 3;
+
+				blocks[x][y][z] = block;
 			}
 		}
 	}
