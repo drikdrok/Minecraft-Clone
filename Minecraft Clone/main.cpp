@@ -10,7 +10,6 @@
 
 #include "shader.h"
 #include "Camera.h"
-#include "Cube.h"
 #include "Game.h"
 #include <filesystem>
 
@@ -93,9 +92,6 @@ int main()
 
     Shader chunkShader("chunkVertex.vs", "chunkFragment.fs");
 
-    Cube cube;
-    cube.initialize();
-
     // load and create a texture 
     // -------------------------
     // texture 1
@@ -156,6 +152,9 @@ int main()
 
     Mesh blockInHand;
 
+    blockInHand.addFullBlock(0, 0, 0, 1);
+    blockInHand.setupMesh();
+
 
     game.initialize(&camera);
     camera.game = &game; //todo: improve
@@ -213,17 +212,17 @@ int main()
         
        // cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
 
-        cube.render(9, camera.Position + camera.Front *0.1f, &shader, 0.001f, -camera.Yaw, camera.Pitch);
+        //cube.render(9, camera.Position + camera.Front *0.1f, &shader, 0.001f, -camera.Yaw, camera.Pitch);
         
         camera.findBlockInfront(&shader);
 
 
-        timer += deltaTime;
+       /* timer += deltaTime;
         if (timer >= 1) {
             timer = 0;
             std::cout << "FPS: " << 1 / deltaTime << std::endl;
         }
-
+        */
 
 
         //cube.render(0, glm::vec3(camera.lookingAt.x, camera.lookingAt.y+1, camera.lookingAt.z), &shader);

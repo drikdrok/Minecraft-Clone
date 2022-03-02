@@ -112,11 +112,15 @@ public:
     }
 
     void setupMesh() {
+        if (vertices.size() == 0)
+            return;
+
         if (!initialized) {
             initialize();
             return;
         }
 
+        glBindVertexArray(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
 
@@ -131,19 +135,27 @@ public:
     }
 
     void render(glm::vec3 position, Shader* currentShader) {
+        if (vertices.size() == 0)
+            return;
+
         glBindVertexArray(VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, position);
 
         currentShader->setMat4("model", model);
 
-        currentShader->setInt("texture1", 0);
+        //currentShader->setInt("texture1", 0);
 
         glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 6);
     }
 
     void render(glm::vec3 position, Shader* currentShader, float scale, float yaw, float pitch) {
+        if (vertices.size() == 0)
+            return;
+
         glBindVertexArray(VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, position);
         model = glm::scale(model, glm::vec3(scale));
@@ -153,7 +165,7 @@ public:
         currentShader->setMat4("model", model);
 
         // bind textures on corresponding texture units
-        currentShader->setInt("texture1", 0);
+       // currentShader->setInt("texture1", 0);
 
         glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 6);
     }

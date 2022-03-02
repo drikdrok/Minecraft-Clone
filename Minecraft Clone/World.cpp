@@ -51,8 +51,15 @@ void World::update() {
 	}
 
 
-	int amountToUpdate = (chunkUpdates.size() > 1) ? 1 : chunkUpdates.size();
+	/*int amountToUpdate = (chunkUpdates.size() > 1) ? 1 : chunkUpdates.size();
 	for (int i = 0; i < amountToUpdate; i++) {
+		Chunk* c = chunkUpdates.front();
+		chunkUpdates.pop_front();
+		c->generateMesh();
+	}
+	*/
+
+	if (chunkUpdates.size() > 0) {
 		Chunk* c = chunkUpdates.front();
 		chunkUpdates.pop_front();
 		c->generateMesh();
@@ -96,6 +103,10 @@ void World::addChunkUpdate(Chunk* c) {
 		chunkUpdates.push_back(c);
 }
 
+int World::getHeightOfBlock(int a, int b) {
+	return abs(floor(noise.GetNoise((float)a, (float)b) * 16));
+}
+
 
 
 
@@ -104,11 +115,33 @@ void World::addChunkUpdate(Chunk* c) {
 
 
 void Chunk::generate() {
-	for (int x = 0; x < size; x++) {
+	/*for (int x = 0; x < size; x++) {
 		for (int y = 0; y < size; y++) {
 			for (int z = 0; z < size; z++) {
 				if (y == 7)
 					blocks[x][y][z] = std::rand() % 6+2;
+			}
+		}
+	}
+	*/
+
+	if (position.y == 0) {
+		for (int x = 0; x < size; x++) {
+			for (int z = 0; z < size; z++) {
+				int x1 = position.x * 16 + x;
+				int x2 = position.z * 16 + z;
+				//std::cout << x1 << std::endl;
+				int height = game->world->getHeightOfBlock(abs(x1), abs(x2));
+			//	std::cout << height << std::endl;
+				for (int y = height; y > 0; y--) {
+					int block = 2;
+					if (y < height - 4)
+						block = 1;
+					else if (y < height)
+						block = 3;
+
+					blocks[x][y][z] = block;
+				}
 			}
 		}
 	}
@@ -168,7 +201,7 @@ void Chunk::setBlock(glm::vec3 position, int type) {
 	
 	generateMesh();
 
-	for (int x = -1; x <= 1; x++) {
+	/*for (int x = -1; x <= 1; x++) {
 		for (int y = -1; y <= 1; y++) {
 			for (int z = -1; z <= 1; z++) {
 				if (game->world->chunkExists(glm::vec3(this->position.x + x, this->position.y + y, this->position.z + z))) {
@@ -178,4 +211,5 @@ void Chunk::setBlock(glm::vec3 position, int type) {
 			}
 		}
 	}
+	*/
 }

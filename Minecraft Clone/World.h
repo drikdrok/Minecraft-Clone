@@ -1,10 +1,11 @@
 #pragma once
 
 #include "shader.h"
-#include "Cube.h"
 #include <vector>
 
 #include "Mesh.h"
+
+#include "Noise.h"
 
 #include <deque>
 
@@ -21,6 +22,9 @@ class World
 	public:
 		World(Game* game) { 
 			this->game = game;
+
+			noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+
 		}
 
 		void generate();
@@ -38,6 +42,8 @@ class World
 
 		void setBlock(glm::vec3 position, int type);
 
+		int getHeightOfBlock(int x, int z);
+
 	private:
 		Game* game;
 
@@ -46,6 +52,9 @@ class World
 		std::deque<Chunk*> chunkUpdates;
 
 		std::vector<Chunk*> chunks;
+		
+		FastNoiseLite noise;
+
 
 };
 
