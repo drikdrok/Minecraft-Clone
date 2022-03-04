@@ -1,8 +1,13 @@
 #pragma once
 
 #include "shader.h"
-#include "Cube.h"
 #include <vector>
+
+#include "Mesh.h"
+
+#include "Noise.h"
+
+#include <deque>
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -17,32 +22,38 @@ class World
 	public:
 		World(Game* game) { 
 			this->game = game;
-			generate(); 
+
+			noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+
 		}
+
 		void generate();
 		void render(Shader* currentShader);
-		int getBlock(int x, int y, int z);
-		void setBlock(int x, int y, int z, int type);
-
 		void update();
 
-		static const int size = 16;
+		int getBlock(glm::vec3 position);
 
-	private:
-		//int blocks[size][size][size] = { 0 };
+		void addChunkUpdate(Chunk* c);
 
-		std::vector<Chunk*> chunks;
-
-		Game* game;
-
-
-		int renderDistance = 1;
-
-		Chunk* getChunk(glm::vec3 position);
-		glm::vec3 getChunkOfBlock(glm::vec3 block);
 
 		bool chunkExists(glm::vec3 position);
 
+		Chunk* getChunk(glm::vec3 position);
+
+		void setBlock(glm::vec3 position, int type);
+
+		int getHeightOfBlock(int x, int z);
+
+	private:
+		Game* game;
+
+		int renderDistance = 3;
+
+		std::deque<Chunk*> chunkUpdates;
+
+		std::vector<Chunk*> chunks;
+		
+		FastNoiseLite noise;
 
 
 };
@@ -50,38 +61,33 @@ class World
 
 class Chunk {
 public:
-
 	Chunk(Game* game, glm::vec3 position, int block) {
 		this->game = game;
 		this->position = position;
 
-		generate(block);
+		generate();
 	}
 
-	void generate(int block);
+
+	void generate();
 	void render(Shader* currentShader);
-	int getBlock(int x, int y, int z);
-	void setBlock(int x, int y, int z, int type);
 
-
-	std::vector<Mesh> meshes;
-
-	void update();
-
-	
-
+	int getBlock(glm::vec3 position);
+	void setBlock(glm::vec3 position, int type);
 
 	glm::vec3 position;
+	void generateMesh();
 
 
 
 private:
 	int blocks[16][16][16] = { 0 };
-
-	int size = 16;
-
-
 	Game* game;
+
+	const int size = 16;
+	
+
+	Mesh mesh;
 
 
 

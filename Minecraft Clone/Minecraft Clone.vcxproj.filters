@@ -71,6 +71,9 @@
     <ClInclude Include="Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Noise.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.glsl">
@@ -79,10 +82,10 @@
     <None Include="vertexShader.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="worldFragment.fs">
+    <None Include="chunkFragment.fs">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="worldVertex.vs">
+    <None Include="chunkVertex.vs">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

@@ -10,7 +10,6 @@
 
 #include "shader.h"
 #include "Camera.h"
-#include "Cube.h"
 #include "Game.h"
 #include <filesystem>
 
@@ -91,17 +90,16 @@ int main()
     // ------------------------------------
     Shader shader("vertexShader.glsl", "fragmentShader.glsl");
 
-    Cube cube;
-    cube.initialize();
+    Shader chunkShader("chunkVertex.vs", "chunkFragment.fs");
 
     // load and create a texture 
     // -------------------------
     // texture 1
     // ---------
-    glGenTextures(7, &textures[numTextures]);
+    glGenTextures(1, &textures[numTextures]);
 
 
-    loadTexture("gfx/textures/cobblestone.png");
+   /* loadTexture("gfx/textures/cobblestone.png");
     loadTexture("gfx/textures/dirt.png");
     loadTexture("gfx/textures/mossy_cobblestone.png");
     loadTexture("gfx/textures/glass.png");
@@ -109,13 +107,58 @@ int main()
     loadTexture("gfx/textures/oak_planks.png");
     loadTexture("gfx/textures/dirt.jpg");
 
+    */
+
+
+    //loadTexture("gfx/textures/cobblestone.png");
+
+
+    unsigned int texture1, texture2;
+    // texture 1
+    // ---------
+    glGenTextures(1, &texture1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    // set the texture wrapping parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // set texture filtering parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    // load image, create texture and generate mipmaps
+    int width, height, nrChannels;
+    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+    unsigned char* data = stbi_load("gfx/textures/sheet.png", &width, &height, &nrChannels, 0);
+    if (data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+    stbi_image_free(data);
+
+
+
+
+
+
     // tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
     // -------------------------------------------------------------------------------------------
     shader.use();
-    shader.setInt("texture1", 1);
+
+    Mesh blockInHand;
+
+    blockInHand.addFullBlock(0, 0, 0, 1, 1.0f);
+    blockInHand.setupMesh();
+
 
     game.initialize(&camera);
     camera.game = &game; //todo: improve
+
+    float timer = 0; 
 
 
     // render loop
@@ -141,24 +184,44 @@ int main()
         // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         shader.setMat4("projection", projection);
+
       
         // camera/view transformation
         glm::mat4 view = camera.GetViewMatrix();
         shader.setMat4("view", view);
 
 
-        // render boxes
+        //chunkShader.use();
+        //chunkShader.setMat4("projection", projection);
+        //chunkShader.setMat4("view", view);
+        
         game.render(&shader);
 
-        glm::vec3 handPosition = glm::vec3(camera.Position.x, camera.Position.y, camera.Position.z) + camera.Front * 0.3f + camera.Right * 0.15f - camera.Up * 0.1f + camera.Up * std::sinf(1.3f*glfwGetTime()) * 0.01f;
+        shader.use();
+
+        glm::vec3 handPosition = glm::vec3(camera.Position.x, camera.Position.y, camera.Position.z) + camera.Front * 0.22f + camera.Right * 0.1f - camera.Up * 0.15f + camera.Up * std::sinf(1.3f*glfwGetTime()) * 0.01f;
        
         shader.setFloat("brightness", 1.0f);
-        cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
+       
+        blockInHand.reset();
+        blockInHand.addFullBlock(0, 0, 0, game.player->blockInHand, 1.0f);
+        blockInHand.setupMesh();
 
+        blockInHand.render(handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch);
+        
+       // cube.render(game.player->blockInHand, handPosition, &shader, 0.1f, -camera.Yaw, camera.Pitch); // Render hand
+
+        //cube.render(9, camera.Position + camera.Front *0.1f, &shader, 0.001f, -camera.Yaw, camera.Pitch);
         
         camera.findBlockInfront(&shader);
 
 
+       /* timer += deltaTime;
+        if (timer >= 1) {
+            timer = 0;
+            std::cout << "FPS: " << 1 / deltaTime << std::endl;
+        }
+        */
 
 
         //cube.render(0, glm::vec3(camera.lookingAt.x, camera.lookingAt.y+1, camera.lookingAt.z), &shader);

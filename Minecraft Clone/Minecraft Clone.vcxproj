@@ -157,6 +157,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Noise.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="World.h" />
@@ -164,8 +165,8 @@
   <ItemGroup>
     <None Include="fragmentShader.glsl" />
     <None Include="vertexShader.glsl" />
-    <None Include="worldFragment.fs" />
-    <None Include="worldVertex.vs" />
+    <None Include="chunkFragment.fs" />
+    <None Include="chunkVertex.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
