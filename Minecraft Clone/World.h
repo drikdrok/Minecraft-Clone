@@ -35,7 +35,6 @@ class World
 
 		void addChunkUpdate(Chunk* c);
 
-
 		bool chunkExists(glm::vec3 position);
 
 		Chunk* getChunk(glm::vec3 position);
@@ -54,8 +53,6 @@ class World
 		std::vector<Chunk*> chunks;
 		
 		FastNoiseLite noise;
-
-
 };
 
 
@@ -85,10 +82,7 @@ private:
 	Game* game;
 
 	const int size = 16;
-	
 
 	Mesh mesh;
-
-
 
 };

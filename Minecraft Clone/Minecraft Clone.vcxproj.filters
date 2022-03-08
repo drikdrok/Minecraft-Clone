@@ -39,9 +39,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,13 +56,7 @@
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HUD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
@@ -76,16 +67,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragmentShader.glsl">
+    <None Include="fragmentShader.fs">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="vertexShader.glsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="chunkFragment.fs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="chunkVertex.vs">
+    <None Include="vertexShader.vs">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

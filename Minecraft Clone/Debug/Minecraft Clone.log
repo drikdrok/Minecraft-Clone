@@ -52,6 +52,7 @@ C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(120,29): 
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(121,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(122,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(122,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Player.cpp
   World.cpp
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(31,28): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
           with
@@ -106,20 +107,20 @@ C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(120,29): 
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(121,29): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(122,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(122,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(107,12): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(130,82): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(130,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(131,23): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(94,12): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(107,82): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(107,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(108,23): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(164,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(167,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(170,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(173,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(176,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(179,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(139,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(142,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(145,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(148,52): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(151,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(154,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   main.cpp
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(31,28): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
           with
@@ -175,12 +176,10 @@ C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(121,29): 
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(122,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Mesh.h(122,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   The contents of <filesystem> are available only with C++17 or later.
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(154,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(202,194): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(207,69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(116,28): warning C4101: 'texture2': unreferenced local variable
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(128,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(170,194): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\main.cpp(175,69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating Code...
-C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(81): warning C4715: 'World::getChunk': not all control paths return a value
-  LINK : C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Debug\Minecraft Clone.exe not found or not built by the last incremental link; performing full link
+C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\World.cpp(69): warning C4715: 'World::getChunk': not all control paths return a value
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Minecraft Clone.vcxproj -> C:\Users\drikd\Documents\GitHub\Minecraft-Clone\Minecraft Clone\Debug\Minecraft Clone.exe

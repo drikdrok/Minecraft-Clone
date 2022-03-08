@@ -36,9 +36,6 @@ void World::update() {
 	glm::vec3 playerChunk = positionToChunk(game->camera->Position);
 	glm::vec3 lookingAtCoords1 = positionToChunk(game->camera->lookingAt);
 	glm::vec3 lookingAtCoords2 = positionToRelativeChunkCoords(game->camera->lookingAt);
-	//std::cout << "PlayerChunk: " << playerChunk.x << ", " << playerChunk.y << ", " << playerChunk.z << std::endl;
-	//std::cout << "Look: " << game->camera->lookingAt.x << ", " << game->camera->lookingAt.y << ", " << game->camera->lookingAt.z << ";    Chunk: " << lookingAtCoords1.x << ", " << lookingAtCoords1.y << ", " << lookingAtCoords1.z << ";     Relative: " << lookingAtCoords2.x << ", " << lookingAtCoords2.y << ", " << lookingAtCoords2.z << std::endl;
-
 
 	for (int x = -renderDistance; x < renderDistance; x++) {
 		for (int y = -renderDistance; y < renderDistance; y++) {
@@ -49,15 +46,6 @@ void World::update() {
 			}
 		}
 	}
-
-
-	/*int amountToUpdate = (chunkUpdates.size() > 1) ? 1 : chunkUpdates.size();
-	for (int i = 0; i < amountToUpdate; i++) {
-		Chunk* c = chunkUpdates.front();
-		chunkUpdates.pop_front();
-		c->generateMesh();
-	}
-	*/
 
 	if (chunkUpdates.size() > 0) {
 		Chunk* c = chunkUpdates.front();
@@ -96,7 +84,6 @@ void World::setBlock(glm::vec3 position, int type) {
 }
 
 void World::addChunkUpdate(Chunk* c) {
-
 	//Check to make sure chunk is not already in deque
 	std::deque<Chunk*>::iterator it = std::find(chunkUpdates.begin(), chunkUpdates.end(), c);
 	if (it == chunkUpdates.end())
@@ -115,16 +102,6 @@ int World::getHeightOfBlock(int x, int z) {
 
 
 void Chunk::generate() {
-	/*for (int x = 0; x < size; x++) {
-		for (int y = 0; y < size; y++) {
-			for (int z = 0; z < size; z++) {
-				if (y == 7)
-					blocks[x][y][z] = std::rand() % 6+2;
-			}
-		}
-	}
-	*/
-
 	for (int x = 0; x < size; x++) {
 		for (int z = 0; z < size; z++) {
 			int heightGlobal = game->world->getHeightOfBlock(abs(position.x * 16 + x), abs(position.z * 16 + z)) ;
@@ -154,8 +131,6 @@ void Chunk::generate() {
 void Chunk::generateMesh() {
 	mesh.reset();
 
-	//float timeStart = static_cast<float>(glfwGetTime());
-
 	for (int x = 0; x < size; x++) {
 		for (int y = 0; y < size; y++) {
 			for (int z = 0; z < size; z++) {
@@ -178,26 +153,16 @@ void Chunk::generateMesh() {
 					if (getBlock(glm::vec3(x, y, z - 1)) <= 0)
 						mesh.addSouthFace(x, y, z, blocks[x][y][z], 1.0f);
 
-					//mesh.addBottomFace(x, y, z);
 				}
 			}
 		}
 	}
 
-	//std::cout << "Time to generate mesh: " << static_cast<float>(glfwGetTime()) - timeStart << std::endl;
-	//timeStart = static_cast<float>(glfwGetTime());
-
 	mesh.setupMesh();
-
-	//std::cout << "Time to setup mesh: " << static_cast<float>(glfwGetTime()) - timeStart << std::endl;
-
 }
 
 void Chunk::render(Shader* currentShader) {
-	//currentShader->setFloat("brightness", 1.0f);
-
 	mesh.render(glm::vec3(position.x * 16, position.y * 16, position.z * 16), currentShader);
-
 }
 
 
