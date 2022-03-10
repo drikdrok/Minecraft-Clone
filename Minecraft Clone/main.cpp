@@ -41,6 +41,10 @@ Game game;
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
+
+bool lineMode = false;
+
+
 unsigned int textures[7];
 int numTextures = 0;
 
@@ -150,6 +154,11 @@ int main()
         // render
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
+        
+        if (lineMode)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        else
+            glPolygonMode(GL_FRONT_AND_BACK, GL_TRIANGLES);
 
         shader.use();
 
@@ -216,6 +225,12 @@ void processInput(GLFWwindow* window)
         camera.ProcessKeyboard(UP, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
         camera.ProcessKeyboard(DOWN, deltaTime);
+
+
+    if (glfwGetKey(window, GLFW_KEY_TAB) == GLFW_PRESS)
+        lineMode = true;
+    else
+        lineMode = false;
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes

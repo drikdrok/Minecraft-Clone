@@ -55,6 +55,7 @@ void World::update() {
 }
 
 bool World::chunkExists(glm::vec3 position) {
+	//THIS SHOULD BE OPTIMIZED SO MUCH
 	for (auto& chunk : chunks)
 		if (chunk->position == position)
 			return true;
@@ -63,6 +64,7 @@ bool World::chunkExists(glm::vec3 position) {
 }
 
 Chunk* World::getChunk(glm::vec3 position) {
+	//THIS SHOULD BE OPTIMIZED SO MUCH
 	for (Chunk* chunk : chunks)
 		if (chunk->position == position)
 			return chunk;
@@ -97,22 +99,20 @@ int World::getHeightOfBlock(int x, int z) {
 
 
 
-
 //CHUNK
-
 
 void Chunk::generate() {
 	for (int x = 0; x < size; x++) {
 		for (int z = 0; z < size; z++) {
-			int heightGlobal = game->world->getHeightOfBlock(abs(position.x * 16 + x), abs(position.z * 16 + z)) ;
-			int heightRelative = heightGlobal - position.y * 16;
+			int heightGlobal = game->world->getHeightOfBlock(abs(position.x * 16 + x), abs(position.z * 16 + z));
+			int heightRelative = heightGlobal - position.y * 16; //Height relative to chunk
 			
 			if (heightRelative < 0)
 				continue;
 			
 			
 			for (int y = (heightRelative > 15) ? 15 : heightRelative; y >= 0; y--) {
-				int block = (heightGlobal > 5) ? 2 : 7;
+				int block = (heightGlobal > 5) ? 2 : 7; //Decide what blocktype to place depending on noise height
 
 				if (y < heightRelative - 4)
 					block = 1;
@@ -123,8 +123,6 @@ void Chunk::generate() {
 			}
 		}
 	}
-
-	//generateMesh();
 	game->world->addChunkUpdate(this);
 }
 
